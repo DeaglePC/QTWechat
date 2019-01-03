@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>res/loading.gif</file>
+        <file>WxAllContactForm.qml</file>
+        <file>WxAllContactList.qml</file>
+        <file>WxCurrentContactForm.qml</file>
+        <file>WxCurrentContactList.qml</file>
+        <file>WxLogin.qml</file>
+        <file>WxChatTabButton.qml</file>
+        <file>UtilClipImage.qml</file>
+        <file>WxSearchBar.qml</file>
+        <file>WxTopBar.qml</file>
+        <file>WxUserPanel.qml</file>
+        <file>res/ldh.jpg</file>
+        <file>res/main_source.png</file>
+        <file>js/work.js</file>
+        <file>js/contact.js</file>
+        <file>js/message.js</file>
+        <file>res/msg.mp3</file>
+        <file>WxChat.qml</file>
+        <file>WxChatFormLeft.qml</file>
+        <file>WxChatFormRight.qml</file>
+    </qresource>
+</RCC>
