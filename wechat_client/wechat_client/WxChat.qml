@@ -4,6 +4,8 @@ Item {
     id: wxChat
     width: 500
     height: 500
+    property alias nickName: chatNick.text
+    property alias msgDataList: chatList.chatDataList
 
     Rectangle {
         id: charWarp
@@ -14,8 +16,8 @@ Item {
             width: parent.width
             height: 50
             Text {
-                id: charNick
-                text: qsTr("text")
+                id: chatNick
+                //text: qsTr("text")
                 height: 30
                 anchors.centerIn: parent
             }
@@ -27,8 +29,11 @@ Item {
                 color: "green"
                 anchors.horizontalCenter: parent.horizontalCenter
             }
+            WxChatList {
+                id: chatList
+                anchors.top: borderTopBar.bottom
+                width: parent.width
+            }
         }
-
     }
-
 }

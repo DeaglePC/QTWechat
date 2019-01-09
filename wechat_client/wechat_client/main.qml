@@ -95,6 +95,12 @@ Window {
             height: root.height
             width: root.width - userPanelCol.width
             anchors.right: mainUi.right
+
+            WxChat {
+                id: wxChat
+                width: parent.width
+                height: parent.height - 200
+            }
         }
     }
     // main ui end

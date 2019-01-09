@@ -1,12 +1,14 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 
 Item {
     id: wxChatFormRight
     property alias head: head_image.source
-    property alias textComponent: content.sourceComponent
+    //property alias textComponent: content.sourceComponent
+    property alias msgContent: content.text
 
-    width: 300
-    height: 50
+    width: head_image.width + contentWarp.width + 15
+    height: contentWarp.height + 20
+
     Rectangle {
         id: formWarp
         color: "transparent"
@@ -16,13 +18,19 @@ Item {
             id: contentWarp
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: head_image.left
-            anchors.rightMargin: 15
+            anchors.rightMargin: 10
+            width: content.width + 20
+            height: content.height + 10
+            color: "#b2e281"
             /*Loader {
                 id: content
+                anchors.centerIn: parent
             }*/
             Text{
-                anchors.fill: parent
-                text: "123123"
+                id: content
+                //text: "123123656516513136"
+                anchors.centerIn: parent
+                wrapMode: Text.WordWrap
             }
         }
 
