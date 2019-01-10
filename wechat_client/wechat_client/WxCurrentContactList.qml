@@ -9,7 +9,9 @@ Item {
     property string color_item_back: "#2e3238"
     property string color_item_hover: "#3b4047"
 
-    signal itemClicked(string _user_name)
+    property int lastSlectIndex: -1
+
+    signal itemClicked(string _user_name, string _head)
     signal userHeadImgStatusChanged(string _user_name, int _status, string _head)
 
     width: 280
@@ -24,6 +26,7 @@ Item {
             orientation: ListView.Vertical
             spacing: 1
             clip: true
+            focus: true
 
             model: ListModel {
                 id: user_model_data
@@ -34,9 +37,17 @@ Item {
 
             delegate: Rectangle {
                 id: dlt
+                property bool _select_color: false
                 width: parent.width
                 height: 65
-                color: color_item_back
+                color:{
+                    if(_select_color){
+                        "#989898"
+                    }
+                    else{
+                        color_item_back
+                    }
+                }
 
                 WxCurrentContactForm {
                     id: user_info_delt
@@ -54,16 +65,32 @@ Item {
                 MouseArea {
                     hoverEnabled: true
                     anchors.fill: parent
-                    onEntered: dlt.color = color_item_hover
-                    onExited: dlt.color = color_item_back
-                    onClicked: onItemPressed(_user_name)
+                    onEntered: {
+                        dlt.color = color_item_hover
+                        user_info_delt.color_last_msg = "#fff"
+                    }
+                    onExited: {
+                        dlt.color = color_item_back
+                        user_info_delt.color_last_msg = "#989898"
+                    }
+                    onClicked: {
+                        lv.currentIndex = index
+                        if (lastSlectIndex !== -1){
+                            user_model_data.get(lastSlectIndex)["_select_color"] = false
+                        }
+                        _select_color = true
+
+                        lastSlectIndex = index
+                        onItemPressed(_user_name, _head)
+                    }
                 }
             }
         }
     }
 
-    function onItemPressed(user_name){
+    function onItemPressed(user_name, head){
         //print(user_name)
-        itemClicked(user_name)
+        //print(head)
+        itemClicked(user_name, head)
     }
 }

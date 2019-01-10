@@ -1,11 +1,9 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
+import QtQuick.Controls 2.4
 
 Item {
     id: wxChatList
     property alias chatDataList: chatWindow
-    property string userName: ""
-
-    property string color_chat_back: "#eeeeee"
 
     width: 600
     height: 400
@@ -13,20 +11,25 @@ Item {
     Rectangle {
         id: warp
         anchors.fill: parent
-        color: color_chat_back
+        color: "transparent"
 
         ListView {
             id: lv
             anchors.fill: parent
             orientation: ListView.Vertical
-            spacing: 2
+            spacing: 10
             clip: true
+
+            ScrollBar.vertical: ScrollBar {
+            }
 
             model: ListModel{
                 id: chatWindow
             }
 
             delegate: Loader {
+                property string dataHead: _head
+                property string dataMsgContent: _msg_content
                 sourceComponent: {
                     if(_is_left) delegateLeft
                     else delegateRight
@@ -38,14 +41,17 @@ Item {
     Component {
         id: delegateLeft
         Rectangle {
-            width: parent.width
+            width: lv.width
             height: leftChatMsgForm.height
+            color: "transparent"
 
             WxChatFormLeft {
                 id: leftChatMsgForm
-                width: 500
-                head: _head
-                msgContent: _msg_content
+                head: dataHead
+                msgContent: dataMsgContent
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.top: parent.top
             }
         }
     }
@@ -53,14 +59,18 @@ Item {
     Component {
         id: delegateRight
         Rectangle {
-            width: parent.width
+            width: lv.width
             height: rightChatMsgForm.height
+            color: "transparent"
+            //color: "#22e2e2"
 
             WxChatFormRight {
                 id: rightChatMsgForm
-                width: 500
-                head: _head
-                msgContent: _msg_content
+                head: dataHead
+                msgContent: dataMsgContent
+                anchors.right: parent.right
+                anchors.rightMargin: 10
+                anchors.top: parent.top
             }
         }
     }

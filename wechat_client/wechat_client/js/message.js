@@ -1,6 +1,7 @@
 
-var recvMsgList = []
-var sendMsgList = []
+var recvMsg = {}
+var sendMsg = {}
+var addCount = {}
 
 var MSG_TYPE = {MSGTYPE_TEXT: 1,
     MSGTYPE_IMAGE: 3,
@@ -73,12 +74,7 @@ function addCurrContactUser(user_name, head, nick, last_msg, time){
 
 // 在全部联系人中通过username找一个好友，返回好友信息的json,找不到返回null
 function findUser(userName){
-    for(var i in all_friends){
-        if (all_friends[i].UserName === userName){
-            return all_friends[i]
-        }
-    }
-    return null
+    return allFriendsDict.hasOwnProperty(userName) ? allFriendsDict[userName] : null
 }
 
 var defaultHeadSource = "/res/ldh.jpg"
@@ -155,15 +151,131 @@ function addCurrentMsg(addMsg) {
 
     // send
     if (fromUser === topBar.user_name){
-        sendMsgList.push(addMsg)
+        // 保存消息
+        if(!sendMsg.hasOwnProperty(toUser)){
+            sendMsg[toUser] = []
+        }
+        var tmpSend = {"msg": msgContent, "timestamp": new Date().getTime()}
+        sendMsg[toUser].push(tmpSend)
+        print(JSON.stringify(sendMsg))
+
+        // 加进最近联系人里
         topLastMsgCurrentUser(toUser)
         addCurrentLastMsg(msgContent, toUser)
+
+        // 加进聊天窗口
+        addChatMsg(toUser, false, msgContent)
     }
     // recv
     else if(toUser === topBar.user_name){
-        recvMsgList.push(addMsg)
+        // 保存消息
+        if(!recvMsg.hasOwnProperty(fromUser)){
+            recvMsg[fromUser] = []
+        }
+        var tmpRecv = {"msg": msgContent, "timestamp": new Date().getTime()}
+        recvMsg[fromUser].push(tmpRecv)
+        print(JSON.stringify(recvMsg))
+
+        // 加进最近联系人里
         topLastMsgCurrentUser(fromUser)
         addCurrentLastMsg(msgContent, fromUser)
         audioMsg.play()
+
+        // 加进聊天窗口
+        addChatMsg(fromUser, true, msgContent)
     }
 }
+
+// 添加一条新的消息到聊天窗口
+function addChatMsg(userName, isLeft, msg){
+    // 如果不是当前聊天窗口，则不添加
+    if(userName !== wxChat.userName){
+        return
+    }
+    var tmp = {"_is_left": isLeft, "_msg_content": msg}
+    if(isLeft){
+        if(allFriendsDict.hasOwnProperty(userName)){
+            tmp["_head"] = allFriendsDict[userName]["localHead"]
+        }
+        else{
+            print("no user head!!!!")
+        }
+    }
+    else{
+        tmp["_head"] = wxChat.selfHead
+    }
+    wxChat.msgDataList.append(tmp)
+}
+
+// 把某个用户的消息显示到右边的聊天窗口
+function showChatMsg(userName, headImage){
+    if (!allFriendsDict.hasOwnProperty(userName)){
+        return
+    }
+    if (wxChat.userName === userName){
+        return
+    }
+
+    wxChat.msgDataList.clear()
+    wxChat.nickName = allFriendsDict[userName]["NickName"]
+    wxChat.userName = userName
+
+    if (sendMsg.hasOwnProperty(userName)){
+        var sendMsgList = sendMsg[userName]
+        var sLen = sendMsg[userName].length
+    }
+    else{
+        sLen = 0
+    }
+
+    if (recvMsg.hasOwnProperty(userName)){
+        var recvMsgList = recvMsg[userName]
+        var rLen = recvMsg[userName].length
+    }
+    else{
+        rLen = 0
+    }
+
+    var ps = 0, pr = 0
+    while(ps < sLen && pr < rLen){
+        var tmp
+        if (sendMsgList[ps]["timestamp"] < recvMsgList[pr]["timestamp"]){
+            tmp = {"_is_left": false, "_head": wxChat.selfHead, "_msg_content": sendMsgList[ps]["msg"]}
+            ps++
+        }
+        else{
+            tmp = {"_is_left": true, "_head": headImage, "_msg_content": recvMsgList[pr]["msg"]}
+            pr++
+        }
+        wxChat.msgDataList.append(tmp)
+    }
+    while(ps < sLen){
+        tmp = {"_is_left": false, "_head": wxChat.selfHead, "_msg_content": sendMsgList[ps]["msg"]}
+        ps++
+        wxChat.msgDataList.append(tmp)
+    }
+    while(pr < rLen){
+        tmp = {"_is_left": true, "_head": headImage, "_msg_content": recvMsgList[pr]["msg"]}
+        pr++
+        wxChat.msgDataList.append(tmp)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

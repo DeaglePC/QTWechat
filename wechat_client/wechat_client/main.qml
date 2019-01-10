@@ -15,7 +15,7 @@ Window {
     property int screen_width: Screen.width
     property int screen_height: Screen.height
 
-    property var all_friends
+    property var allFriendsDict: ({})
 
     CLibWebwx {
         id: wx
@@ -90,17 +90,45 @@ Window {
                 }
             }
         }
+
         Rectangle {
             id: messagePanelCol
             height: root.height
             width: root.width - userPanelCol.width
             anchors.right: mainUi.right
+            visible: false
 
             WxChat {
                 id: wxChat
                 width: parent.width
-                height: parent.height - 200
+                height: parent.height - sendRect.height - borderChat.height
             }
+
+            Rectangle {
+                id: borderChat
+                height: 1
+                width: parent.width
+                color: "#d6d6d6"
+                anchors.top: wxChat.bottom
+            }
+
+            WxChatSend {
+                id: sendRect
+                anchors.top: borderChat.bottom
+                width: parent.width
+                height: 160
+            }
+
+            // test
+            /*MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    print("=====")
+                    wxChat.nickName = "dog"
+                    wxChat.msgDataList.append({"_is_left": false, "_head": "res/ldh.jpg", "_msg_content":"cao"})
+                    wxChat.msgDataList.append({"_is_left": true, "_head": "res/ldh.jpg", "_msg_content":"cao"})
+                }
+            }*/
         }
     }
     // main ui end
@@ -112,6 +140,7 @@ Window {
 
     Component.onCompleted: {
         Work.runWx()
+        //Work.test()
     }
 
     Connections {
@@ -133,5 +162,9 @@ Window {
     Connections {
         target: currentContactList
         onUserHeadImgStatusChanged: Contact.allContactImgStatusChanged(_user_name, _status, _head)
+        onItemClicked: {
+            Work.showChatMsgPanel()
+            Message.showChatMsg(_user_name, _head)
+        }
     }
 }

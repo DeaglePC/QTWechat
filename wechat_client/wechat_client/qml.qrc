@@ -22,5 +22,6 @@
         <file>WxChatFormLeft.qml</file>
         <file>WxChatFormRight.qml</file>
         <file>WxChatList.qml</file>
+        <file>WxChatSend.qml</file>
     </qresource>
 </RCC>

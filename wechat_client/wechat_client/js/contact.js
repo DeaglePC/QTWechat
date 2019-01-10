@@ -24,11 +24,19 @@ function allContactImgStatusChanged(_user_name, _status, _head){
 function dealAllContact(allContact){
     var jsonContact = JSON.parse(allContact);
     var memberList = jsonContact["MemberList"]
-    all_friends = memberList
+    transFriends(memberList)
     for(var i in memberList){
         addAllContactUser(memberList[i].UserName, memberList[i].HeadImgUrl, memberList[i].NickName, memberList[i].PyName)
     }
     print("add all done!!!")
+}
+
+// 把数组好友列表转换成字典的，key是username，value是信息
+function transFriends(memberList){
+    for(var i in memberList){
+        allFriendsDict[memberList[i].UserName] = memberList[i]
+    }
+    print(JSON.stringify(allFriendsDict))
 }
 
 // 把本地的头像加到listview里, 一个头像获取成功后执行
@@ -37,9 +45,16 @@ function addContactHead(headFileName){
     var startIndex = headFileName.lastIndexOf("/")
     var endIndex = headFileName.lastIndexOf(".")
     var userName = headFileName.substring(startIndex + 1, endIndex)
+    var imgSource = headSourceScheme + headFileName
 
+    if (allFriendsDict.hasOwnProperty(userName)){
+        allFriendsDict[userName]["localHead"] = imgSource
+    }
+
+    // 自己的头像
     if (topBar.user_name === userName){
         topBar.head_image_url = headSourceScheme + headFileName
+        wxChat.selfHead = topBar.head_image_url
         return
     }
 
@@ -48,7 +63,7 @@ function addContactHead(headFileName){
     for(var i = 0; i < rowCount; i++){
         var data = allContactList.user_list.get(i)
         if (data._user_name === userName){
-            allContactList.user_list.get(i)._head = headSourceScheme + headFileName
+            allContactList.user_list.get(i)._head = imgSource
         }
     }
 
@@ -60,7 +75,7 @@ function addContactHead(headFileName){
             continue
         }
         if (dataCurr._user_name === userName){
-            currentContactList.user_list.get(j)._head = headSourceScheme + headFileName
+            currentContactList.user_list.get(j)._head = imgSource
         }
     }
 }
