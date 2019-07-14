@@ -1,6 +1,6 @@
 
-var recvMsg = {}
-var sendMsg = {}
+var recvMsgDict = {}
+var sendMsgDict = {}
 var addCount = {}
 
 var MSG_TYPE = {MSGTYPE_TEXT: 1,
@@ -22,27 +22,6 @@ var MSG_TYPE = {MSGTYPE_TEXT: 1,
     MSGTYPE_SYS: 10000,
     MSGTYPE_RECALLED: 10002,  // 撤销消息
 };
-
-var MSG_HINT = {MSGTYPE_TEXT: "",
-    MSGTYPE_IMAGE: "[图片消息]请在手机查看",
-    MSGTYPE_VOICE: "[语音消息]请在手机查看",
-    MSGTYPE_VIDEO: "[视频消息]请在手机查看",
-    MSGTYPE_MICROVIDEO: 62,
-    MSGTYPE_EMOTICON: 47,
-    MSGTYPE_APP: 49,
-    MSGTYPE_VOIPMSG: 50,
-    MSGTYPE_VOIPNOTIFY: 52,
-    MSGTYPE_VOIPINVITE: 53,
-    MSGTYPE_LOCATION: 48,
-    MSGTYPE_STATUSNOTIFY: 51,
-    MSGTYPE_SYSNOTICE: 9999,
-    MSGTYPE_POSSIBLEFRIEND_MSG: 40,
-    MSGTYPE_VERIFYMSG: 37,
-    MSGTYPE_SHARECARD: 42,
-    MSGTYPE_SYS: 10000,
-    MSGTYPE_RECALLED: 10002,  // 撤销消息
-};
-
 
 // 处理消息的入口
 function dealMessage(msg) {
@@ -152,12 +131,12 @@ function addCurrentMsg(addMsg) {
     // send
     if (fromUser === topBar.user_name){
         // 保存消息
-        if(!sendMsg.hasOwnProperty(toUser)){
-            sendMsg[toUser] = []
+        if(!sendMsgDict.hasOwnProperty(toUser)){
+            sendMsgDict[toUser] = []
         }
         var tmpSend = {"msg": msgContent, "timestamp": new Date().getTime()}
-        sendMsg[toUser].push(tmpSend)
-        print(JSON.stringify(sendMsg))
+        sendMsgDict[toUser].push(tmpSend)
+        print(JSON.stringify(sendMsgDict))
 
         // 加进最近联系人里
         topLastMsgCurrentUser(toUser)
@@ -169,12 +148,12 @@ function addCurrentMsg(addMsg) {
     // recv
     else if(toUser === topBar.user_name){
         // 保存消息
-        if(!recvMsg.hasOwnProperty(fromUser)){
-            recvMsg[fromUser] = []
+        if(!recvMsgDict.hasOwnProperty(fromUser)){
+            recvMsgDict[fromUser] = []
         }
         var tmpRecv = {"msg": msgContent, "timestamp": new Date().getTime()}
-        recvMsg[fromUser].push(tmpRecv)
-        print(JSON.stringify(recvMsg))
+        recvMsgDict[fromUser].push(tmpRecv)
+        print(JSON.stringify(recvMsgDict))
 
         // 加进最近联系人里
         topLastMsgCurrentUser(fromUser)
@@ -187,7 +166,7 @@ function addCurrentMsg(addMsg) {
 }
 
 // 添加一条新的消息到聊天窗口
-function addChatMsg(userName, isLeft, msg){
+function addChatMsg(userName, isLeft, msg, msgId, msgStatus){
     // 如果不是当前聊天窗口，则不添加
     if(userName !== wxChat.userName){
         return
@@ -200,9 +179,13 @@ function addChatMsg(userName, isLeft, msg){
         else{
             print("no user head!!!!")
         }
+        tmp["_msg_id"] = ""
+        tmp["_msg_status"] = WxChatFormRight.MsgType.SUCCESS
     }
     else{
         tmp["_head"] = wxChat.selfHead
+        tmp["_msg_id"] = msgId
+        tmp["_msg_status"] = msgStatus
     }
     wxChat.msgDataList.append(tmp)
 }
@@ -220,17 +203,17 @@ function showChatMsg(userName, headImage){
     wxChat.nickName = allFriendsDict[userName]["NickName"]
     wxChat.userName = userName
 
-    if (sendMsg.hasOwnProperty(userName)){
-        var sendMsgList = sendMsg[userName]
-        var sLen = sendMsg[userName].length
+    if (sendMsgDict.hasOwnProperty(userName)){
+        var sendMsgList = sendMsgDict[userName]
+        var sLen = sendMsgDict[userName].length
     }
     else{
         sLen = 0
     }
 
-    if (recvMsg.hasOwnProperty(userName)){
-        var recvMsgList = recvMsg[userName]
-        var rLen = recvMsg[userName].length
+    if (recvMsgDict.hasOwnProperty(userName)){
+        var recvMsgList = recvMsgDict[userName]
+        var rLen = recvMsgDict[userName].length
     }
     else{
         rLen = 0
@@ -261,9 +244,46 @@ function showChatMsg(userName, headImage){
     }
 }
 
+// 发送的消息，显示到最近联系人列表
+function addCurrentSendMsg(toUser, msgContent, msgId) {
+    // 清空输入框
+    sendRect.sendContent = ""
 
+    // 保存消息
+    if(!sendMsgDict.hasOwnProperty(toUser)){
+        sendMsgDict[toUser] = []
+    }
+    var tmpSend = {"msg": msgContent, "timestamp": new Date().getTime()}
+    sendMsgDict[toUser].push(tmpSend)
 
+    // 加进最近联系人里
+    // topLastMsgCurrentUser(toUser) 主动发送的不需要置顶
+    addCurrentLastMsg(msgContent, toUser)
 
+    // 加进聊天窗口
+    addChatMsg(toUser, false, msgContent, msgId, WxChatFormRight.MsgType.SUCCESS)
+}
+
+function sendTextMsg(content){
+    if (content === ""){
+        return
+    }
+
+    var timeStamp = (new Date().getTime()).toString()
+    var fromUser = topBar.user_name
+    var toUser = wxChat.userName
+
+    // 更新ui
+    addCurrentSendMsg(toUser, content, timeStamp);
+
+    // 发送消息
+    wx.sendMsg(fromUser, toUser, content, timeStamp)
+}
+
+function sendTextMsgFinished(content) {
+    print("~~~~~~send fin~~~~~~~~~~~~~~")
+    print(content)
+}
 
 
 

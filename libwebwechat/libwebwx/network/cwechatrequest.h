@@ -38,7 +38,7 @@ public:
     QByteArray getContact();
     void getHeadImage(const QString&);
     void getHeadImageByUsername(const QString&);
-
+    void sendMsg(const QString &fromUser, const QString &toUser, const QString &content, const QString &localId);
 
     static QString spliceSyncKey(const QJsonArray&);
 
@@ -64,10 +64,12 @@ protected:
 
 public slots:
     void sltGetHeadFinished();
+    void sltSendMsgFinished();
 
 signals:
     void sglGetHeadFinished(QString userName, QByteArray headImgData);
     void sglGetUserselfFinished(const QVariantHash &userselfData);
+    void sglSendMsgFinished(const QString &retContent);
 
 
 private:

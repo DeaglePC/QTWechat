@@ -10,7 +10,7 @@ CWebwxWork::CWebwxWork(QObject* parent) : QObject(parent)
 
 CWebwxWork::~CWebwxWork()
 {
-    delAll();
+    //delAll();
 }
 
 void CWebwxWork::sltMainLoop()
@@ -116,6 +116,21 @@ void CWebwxWork::sltGetUserselfFinished(const QVariantHash &userselfData)
     emit sglGetUserselfFinished(userselfData);
 }
 
+void CWebwxWork::sltSendMsg(const QString &fromUser, const QString &toUser, const QString &content, const QString &localId)
+{
+    if(!m_wechatRequest)
+    {
+        return;
+    }
+    // TODO  m_wechatRequest->sendMsg();
+    m_wechatRequest->sendMsg(fromUser, toUser, content, localId);
+}
+
+/*void CWebwxWork::sltSendMsgFinished(const QString &retContent)
+{
+
+}*/
+
 void CWebwxWork::initFlag()
 {
     m_bIsLogin = false;
@@ -127,6 +142,8 @@ void CWebwxWork::initAll()
     m_wechatRequest = new CWechatRequest(nullptr);
     connect(m_wechatRequest, &CWechatRequest::sglGetHeadFinished, this, &CWebwxWork::sltGetHeadFinished);
     connect(m_wechatRequest, &CWechatRequest::sglGetUserselfFinished, this, &CWebwxWork::sltGetUserselfFinished);
+    //connect(m_wechatRequest, &CWechatRequest::sglSendMsgFinished, this, &CWebwxWork::sltSendMsgFinished);
+    connect(m_wechatRequest, &CWechatRequest::sglSendMsgFinished, this, &CWebwxWork::sglSendMsgFinished);
 
     // 保存头像图片的目录清理和创建
     CUtils::dealPath(HEAD_LOCAL_PATH);
@@ -222,5 +239,6 @@ void CWebwxWork::delAll()
     if(m_wechatRequest)
     {
         delete m_wechatRequest;
+        m_wechatRequest = nullptr;
     }
 }

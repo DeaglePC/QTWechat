@@ -7,6 +7,37 @@ Item {
     property alias msgContent: content.text
     property int contentMaxWidth: 300
 
+    // 消息状态
+    enum MsgType {
+        SUCCESS,
+        FAIL,
+        SENDING
+    }
+    property int msgStatus: WxChatFormRight.MsgType.SENDING
+
+    Component {
+        id: failImg
+        UtilClipImage {
+            pos_x: -286
+            pos_y: -432
+            source_image: "res/main_source.png"
+            width: 25
+            height: 25
+            anchors.right: contentWarp.left
+            anchors.rightMargin: 8
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
+    Component {
+        id: sendingImg
+        AnimatedImage {
+            source: "res/sending.gif"
+            width: 16
+            height: 16
+        }
+    }
+
     width: head_image.width + contentWarp.width + contentWarp.anchors.rightMargin
     height: Math.max(contentWarp.height, head_image.height)
 
@@ -15,6 +46,24 @@ Item {
         color: "transparent"
         //color:"#666666"
         anchors.fill: parent
+
+        Loader {
+            id: ldrStatus
+            anchors.right: contentWarp.left
+            anchors.rightMargin: 8
+            anchors.verticalCenter: parent.verticalCenter
+            sourceComponent: {
+                if (msgStatus === WxChatFormRight.MsgType.SENDING){
+                    sendingImg
+                }
+                else if(msgStatus === WxChatFormRight.MsgType.FAIL){
+                    failImg
+                }
+                else if(msgStatus === WxChatFormRight.MsgType.SUCCESS){
+
+                }
+            }
+        }
 
         Rectangle {
             id: contentWarp

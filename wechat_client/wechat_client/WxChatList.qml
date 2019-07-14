@@ -30,6 +30,8 @@ Item {
             delegate: Loader {
                 property string dataHead: _head
                 property string dataMsgContent: _msg_content
+                //property int dataMsgStatus: _msg_status
+                //property string dataMsgId: _msg_id
                 sourceComponent: {
                     if(_is_left) delegateLeft
                     else delegateRight
@@ -68,6 +70,7 @@ Item {
                 id: rightChatMsgForm
                 head: dataHead
                 msgContent: dataMsgContent
+                msgStatus: dataMsgStatus
                 anchors.right: parent.right
                 anchors.rightMargin: 10
                 anchors.top: parent.top

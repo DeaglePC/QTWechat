@@ -18,6 +18,7 @@ public:
     Q_INVOKABLE void work();
     Q_INVOKABLE void getOneHead(const QString &headUrl);
     Q_INVOKABLE void getOneHeadByUsername(const QString &userName);
+    Q_INVOKABLE void sendMsg(const QString &fromUser, const QString &toUser, const QString &content, const QString &localId);
 
     QString qrcode();
 
@@ -28,6 +29,7 @@ public slots:
     void sltOneHeadOk(const QString &headFileName);
     void sltNewMessage(QString newMsg);
     void sltGetUserselfFinished(const QVariantHash &userselfData);
+    void sltSendMsgFinished(const QString &retContent);
 
     void sltMainLoopFinished();
 
@@ -41,6 +43,8 @@ signals:
     void sglOneHeadOk(const QString &headFileName);
     void sglNewMessage(QString newMsg);
     void sglGetUserselfFinished(const QString &strUserselfData);
+    void sglSendMsg(const QString &fromUser, const QString &toUser, const QString &content, const QString &localId);
+    void sglSendMsgFinished(const QString &retContent);
 
     void sglGG();
 

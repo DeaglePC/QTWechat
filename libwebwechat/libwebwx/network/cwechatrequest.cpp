@@ -1,4 +1,4 @@
-﻿#include <QUrl>
+#include <QUrl>
 #include <QUrlQuery>
 #include <QEventLoop>
 #include <QRegularExpression>
@@ -21,6 +21,7 @@ CWechatRequest::~CWechatRequest()
     if(m_netManager)
     {
         delete m_netManager;
+        m_netManager = nullptr;
     }
 }
 
@@ -499,6 +500,37 @@ void CWechatRequest::getHeadImageByUsername(const QString &userName)
     connect(reply, &QNetworkReply::finished, this, &CWechatRequest::sltGetHeadFinished);
 }
 
+void CWechatRequest::sendMsg(const QString &fromUser, const QString &toUser, const QString &content, const QString &localId)
+{
+    QUrlQuery urlQuery;
+    QUrl url(m_sPrefixUrl + WechatRequestValue::SEND_MSG);
+    QNetworkRequest request;
+
+    urlQuery.addQueryItem("pass_ticket", m_sPassTicket);
+    url.setQuery(urlQuery);
+
+    request.setUrl(url);
+    request.setRawHeader("User-Agent", WechatRequestHeader::USER_AGENT);
+    request.setRawHeader("ContentType", "application/json; charset=UTF-8");
+    request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/x-www-form-urlencoded"));
+
+    QJsonObject jsonMsg;
+    jsonMsg.insert("ClientMsgId", localId);
+    jsonMsg.insert("LocalID", localId);
+    jsonMsg.insert("Content", content);
+    jsonMsg.insert("FromUserName", fromUser);
+    jsonMsg.insert("ToUserName", toUser);
+    jsonMsg.insert("Type", 1);
+
+    QJsonObject jsonData;
+    jsonData.insert("BaseRequest", m_jsonBaseRequest);
+    jsonData.insert("Msg", jsonMsg);
+    jsonData.insert("Scene", 0);
+    QByteArray postData = QJsonDocument(jsonData).toJson();
+    QNetworkReply *reply = this->m_netManager->post(request, postData);
+    connect(reply, &QNetworkReply::finished, this, &CWechatRequest::sltSendMsgFinished);
+}
+
 QString CWechatRequest::spliceSyncKey(const QJsonArray &arrySynckeyList)
 {
     QStringList keyList;
@@ -528,5 +560,13 @@ void CWechatRequest::sltGetHeadFinished()
         emit sglGetHeadFinished(userName, content);
     }
 
+    reply->deleteLater();
+}
+
+void CWechatRequest::sltSendMsgFinished()
+{
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+    QByteArray content = reply->readAll();
+    emit sglSendMsgFinished(content);
     reply->deleteLater();
 }

@@ -24,6 +24,7 @@ const QHash<QString, QVector<QString> > DETAIL_URL = {qvPair("wx2.qq.com",      
 const QString SYNC_CHECK = "synccheck";
 const QString GET_MSG = "webwxsync";
 const QString GET_CONTACT = "webwxgetcontact";
+const QString SEND_MSG = "webwxsendmsg";
 }
 
 namespace WechatRequestUrl

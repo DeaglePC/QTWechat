@@ -32,6 +32,8 @@ public slots:
     void sltGetHeadImgByUsername(const QString &userName);
     void sltGetHeadFinished(const QString &userName, const QByteArray &content); // 图片原始数据
     void sltGetUserselfFinished(const QVariantHash &userselfData);  // 用户信息
+    void sltSendMsg(const QString &fromUser, const QString &toUser, const QString &content, const QString &localId);    // 发送一条文本消息
+    //void sltSendMsgFinished(const QString &retContent);
 signals:
     void sglQrcodeOk(const QString &qrcode);
     void sglHintMsg(int msg);
@@ -39,6 +41,7 @@ signals:
     void sglOneHeadOk(const QString &headFileName);
     void sglNewMessage(QString newMsg);
     void sglGetUserselfFinished(const QVariantHash &userselfData);
+    void sglSendMsgFinished(const QString &retContent);
 
     void sglMainLoopFinished();
 

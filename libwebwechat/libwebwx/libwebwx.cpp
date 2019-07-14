@@ -26,6 +26,9 @@ void CLibWebwx::init()
     connect(this, &CLibWebwx::sglGetHeadImg, m_wxWorker, &CWebwxWork::sltGetHeadImg);
     connect(this, &CLibWebwx::sglGetHeadImgByUsername, m_wxWorker, &CWebwxWork::sltGetHeadImgByUsername);
     connect(m_wxWorker, &CWebwxWork::sglGetUserselfFinished, this, &CLibWebwx::sltGetUserselfFinished);
+    connect(this, &CLibWebwx::sglSendMsg, m_wxWorker, &CWebwxWork::sltSendMsg);
+    // 不做处理，直接发出信号
+    connect(m_wxWorker, &CWebwxWork::sglSendMsgFinished, this, &CLibWebwx::sglSendMsgFinished);
 }
 
 void CLibWebwx::getOneHead(const QString &headUrl)
@@ -45,6 +48,15 @@ void CLibWebwx::getOneHeadByUsername(const QString &userName)
         return;
     }
     emit sglGetHeadImgByUsername(userName);
+}
+
+void CLibWebwx::sendMsg(const QString &fromUser, const QString &toUser, const QString &content, const QString &localId)
+{
+    if (!m_wxWorker)
+    {
+        return;
+    }
+    emit sglSendMsg(fromUser, toUser, content, localId);
 }
 
 void CLibWebwx::work()
@@ -96,7 +108,7 @@ void CLibWebwx::sltOneHeadOk(const QString &headFileName)
 
 void CLibWebwx::sltNewMessage(QString newMsg)
 {
-    // TODO 处理各种类型的消息，组合后发给前端
+    // 直接把消息内容给前端，前端负责区分
     emit sglNewMessage(newMsg);
 }
 
@@ -114,5 +126,10 @@ void CLibWebwx::sltGetUserselfFinished(const QVariantHash &userselfData)
 
 void CLibWebwx::sltMainLoopFinished()
 {
+    if (m_wxWorker)
+    {
+        delete m_wxWorker;
+        m_wxWorker = nullptr;
+    }
     emit sglGG();
 }

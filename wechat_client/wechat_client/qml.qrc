@@ -23,5 +23,6 @@
         <file>WxChatFormRight.qml</file>
         <file>WxChatList.qml</file>
         <file>WxChatSend.qml</file>
+        <file>res/sending.gif</file>
     </qresource>
 </RCC>

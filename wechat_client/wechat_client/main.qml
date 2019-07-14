@@ -152,6 +152,7 @@ Window {
         onSglGetUserselfFinished: Contact.addUserselfData(strUserselfData)
         onSglGG: Work.gameOver()
         onSglNewMessage: Message.dealMessage(newMsg)
+        onSglSendMsgFinished: Message.sendTextMsgFinished(retContent)
     }
 
     Connections {
@@ -166,5 +167,10 @@ Window {
             Work.showChatMsgPanel()
             Message.showChatMsg(_user_name, _head)
         }
+    }
+
+    Connections {
+        target: sendRect
+        onSendClicked: Message.sendTextMsg(_content)
     }
 }

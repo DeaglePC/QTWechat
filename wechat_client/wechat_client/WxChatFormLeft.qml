@@ -10,6 +10,7 @@ Item {
     width: head_image.width + contentWarp.width + contentWarp.anchors.leftMargin
     height: Math.max(contentWarp.height, head_image.height)
 
+
     Rectangle {
         id: formWarp
         color: "transparent"

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CWebwxWork_t {
-    QByteArrayData data[23];
-    char stringdata0[289];
+    QByteArrayData data[29];
+    char stringdata0[354];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,26 +45,34 @@ QT_MOC_LITERAL(10, 99, 13), // "sglNewMessage"
 QT_MOC_LITERAL(11, 113, 6), // "newMsg"
 QT_MOC_LITERAL(12, 120, 22), // "sglGetUserselfFinished"
 QT_MOC_LITERAL(13, 143, 12), // "userselfData"
-QT_MOC_LITERAL(14, 156, 19), // "sglMainLoopFinished"
-QT_MOC_LITERAL(15, 176, 11), // "sltMainLoop"
-QT_MOC_LITERAL(16, 188, 13), // "sltGetHeadImg"
-QT_MOC_LITERAL(17, 202, 3), // "url"
-QT_MOC_LITERAL(18, 206, 23), // "sltGetHeadImgByUsername"
-QT_MOC_LITERAL(19, 230, 8), // "userName"
-QT_MOC_LITERAL(20, 239, 18), // "sltGetHeadFinished"
-QT_MOC_LITERAL(21, 258, 7), // "content"
-QT_MOC_LITERAL(22, 266, 22) // "sltGetUserselfFinished"
+QT_MOC_LITERAL(14, 156, 18), // "sglSendMsgFinished"
+QT_MOC_LITERAL(15, 175, 10), // "retContent"
+QT_MOC_LITERAL(16, 186, 19), // "sglMainLoopFinished"
+QT_MOC_LITERAL(17, 206, 11), // "sltMainLoop"
+QT_MOC_LITERAL(18, 218, 13), // "sltGetHeadImg"
+QT_MOC_LITERAL(19, 232, 3), // "url"
+QT_MOC_LITERAL(20, 236, 23), // "sltGetHeadImgByUsername"
+QT_MOC_LITERAL(21, 260, 8), // "userName"
+QT_MOC_LITERAL(22, 269, 18), // "sltGetHeadFinished"
+QT_MOC_LITERAL(23, 288, 7), // "content"
+QT_MOC_LITERAL(24, 296, 22), // "sltGetUserselfFinished"
+QT_MOC_LITERAL(25, 319, 10), // "sltSendMsg"
+QT_MOC_LITERAL(26, 330, 8), // "fromUser"
+QT_MOC_LITERAL(27, 339, 6), // "toUser"
+QT_MOC_LITERAL(28, 346, 7) // "localId"
 
     },
     "CWebwxWork\0sglQrcodeOk\0\0qrcode\0"
     "sglHintMsg\0msg\0sglAllContactOk\0"
     "allContact\0sglOneHeadOk\0headFileName\0"
     "sglNewMessage\0newMsg\0sglGetUserselfFinished\0"
-    "userselfData\0sglMainLoopFinished\0"
+    "userselfData\0sglSendMsgFinished\0"
+    "retContent\0sglMainLoopFinished\0"
     "sltMainLoop\0sltGetHeadImg\0url\0"
     "sltGetHeadImgByUsername\0userName\0"
     "sltGetHeadFinished\0content\0"
-    "sltGetUserselfFinished"
+    "sltGetUserselfFinished\0sltSendMsg\0"
+    "fromUser\0toUser\0localId"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,28 +82,30 @@ static const uint qt_meta_data_CWebwxWork[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       7,       // signalCount
+       8,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   74,    2, 0x06 /* Public */,
-       4,    1,   77,    2, 0x06 /* Public */,
-       6,    1,   80,    2, 0x06 /* Public */,
-       8,    1,   83,    2, 0x06 /* Public */,
-      10,    1,   86,    2, 0x06 /* Public */,
-      12,    1,   89,    2, 0x06 /* Public */,
-      14,    0,   92,    2, 0x06 /* Public */,
+       1,    1,   84,    2, 0x06 /* Public */,
+       4,    1,   87,    2, 0x06 /* Public */,
+       6,    1,   90,    2, 0x06 /* Public */,
+       8,    1,   93,    2, 0x06 /* Public */,
+      10,    1,   96,    2, 0x06 /* Public */,
+      12,    1,   99,    2, 0x06 /* Public */,
+      14,    1,  102,    2, 0x06 /* Public */,
+      16,    0,  105,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      15,    0,   93,    2, 0x0a /* Public */,
-      16,    1,   94,    2, 0x0a /* Public */,
-      18,    1,   97,    2, 0x0a /* Public */,
-      20,    2,  100,    2, 0x0a /* Public */,
-      22,    1,  105,    2, 0x0a /* Public */,
+      17,    0,  106,    2, 0x0a /* Public */,
+      18,    1,  107,    2, 0x0a /* Public */,
+      20,    1,  110,    2, 0x0a /* Public */,
+      22,    2,  113,    2, 0x0a /* Public */,
+      24,    1,  118,    2, 0x0a /* Public */,
+      25,    4,  121,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -104,14 +114,16 @@ static const uint qt_meta_data_CWebwxWork[] = {
     QMetaType::Void, QMetaType::QString,    9,
     QMetaType::Void, QMetaType::QString,   11,
     QMetaType::Void, QMetaType::QVariantHash,   13,
+    QMetaType::Void, QMetaType::QString,   15,
     QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   17,
     QMetaType::Void, QMetaType::QString,   19,
-    QMetaType::Void, QMetaType::QString, QMetaType::QByteArray,   19,   21,
+    QMetaType::Void, QMetaType::QString,   21,
+    QMetaType::Void, QMetaType::QString, QMetaType::QByteArray,   21,   23,
     QMetaType::Void, QMetaType::QVariantHash,   13,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   26,   27,   23,   28,
 
        0        // eod
 };
@@ -128,12 +140,14 @@ void CWebwxWork::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->sglOneHeadOk((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 4: _t->sglNewMessage((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 5: _t->sglGetUserselfFinished((*reinterpret_cast< const QVariantHash(*)>(_a[1]))); break;
-        case 6: _t->sglMainLoopFinished(); break;
-        case 7: _t->sltMainLoop(); break;
-        case 8: _t->sltGetHeadImg((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 9: _t->sltGetHeadImgByUsername((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 10: _t->sltGetHeadFinished((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QByteArray(*)>(_a[2]))); break;
-        case 11: _t->sltGetUserselfFinished((*reinterpret_cast< const QVariantHash(*)>(_a[1]))); break;
+        case 6: _t->sglSendMsgFinished((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 7: _t->sglMainLoopFinished(); break;
+        case 8: _t->sltMainLoop(); break;
+        case 9: _t->sltGetHeadImg((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 10: _t->sltGetHeadImgByUsername((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 11: _t->sltGetHeadFinished((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QByteArray(*)>(_a[2]))); break;
+        case 12: _t->sltGetUserselfFinished((*reinterpret_cast< const QVariantHash(*)>(_a[1]))); break;
+        case 13: _t->sltSendMsg((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -181,9 +195,16 @@ void CWebwxWork::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             }
         }
         {
+            using _t = void (CWebwxWork::*)(const QString & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CWebwxWork::sglSendMsgFinished)) {
+                *result = 6;
+                return;
+            }
+        }
+        {
             using _t = void (CWebwxWork::*)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CWebwxWork::sglMainLoopFinished)) {
-                *result = 6;
+                *result = 7;
                 return;
             }
         }
@@ -215,13 +236,13 @@ int CWebwxWork::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 14)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 12;
+        _id -= 14;
     }
     return _id;
 }
@@ -269,9 +290,16 @@ void CWebwxWork::sglGetUserselfFinished(const QVariantHash & _t1)
 }
 
 // SIGNAL 6
+void CWebwxWork::sglSendMsgFinished(const QString & _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 6, _a);
+}
+
+// SIGNAL 7
 void CWebwxWork::sglMainLoopFinished()
 {
-    QMetaObject::activate(this, &staticMetaObject, 6, nullptr);
+    QMetaObject::activate(this, &staticMetaObject, 7, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

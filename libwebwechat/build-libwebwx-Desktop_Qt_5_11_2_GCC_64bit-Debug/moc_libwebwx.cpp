@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CLibWebwx_t {
-    QByteArrayData data[33];
-    char stringdata0[411];
+    QByteArrayData data[42];
+    char stringdata0[511];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,19 +51,28 @@ QT_MOC_LITERAL(16, 173, 13), // "sglNewMessage"
 QT_MOC_LITERAL(17, 187, 6), // "newMsg"
 QT_MOC_LITERAL(18, 194, 22), // "sglGetUserselfFinished"
 QT_MOC_LITERAL(19, 217, 15), // "strUserselfData"
-QT_MOC_LITERAL(20, 233, 5), // "sglGG"
-QT_MOC_LITERAL(21, 239, 16), // "sltSetQrcodeLink"
-QT_MOC_LITERAL(22, 256, 10), // "sltHintMsg"
-QT_MOC_LITERAL(23, 267, 15), // "sltAllContactOk"
-QT_MOC_LITERAL(24, 283, 12), // "sltOneHeadOk"
-QT_MOC_LITERAL(25, 296, 13), // "sltNewMessage"
-QT_MOC_LITERAL(26, 310, 22), // "sltGetUserselfFinished"
-QT_MOC_LITERAL(27, 333, 12), // "userselfData"
-QT_MOC_LITERAL(28, 346, 19), // "sltMainLoopFinished"
-QT_MOC_LITERAL(29, 366, 4), // "work"
-QT_MOC_LITERAL(30, 371, 10), // "getOneHead"
-QT_MOC_LITERAL(31, 382, 7), // "headUrl"
-QT_MOC_LITERAL(32, 390, 20) // "getOneHeadByUsername"
+QT_MOC_LITERAL(20, 233, 10), // "sglSendMsg"
+QT_MOC_LITERAL(21, 244, 8), // "fromUser"
+QT_MOC_LITERAL(22, 253, 6), // "toUser"
+QT_MOC_LITERAL(23, 260, 7), // "content"
+QT_MOC_LITERAL(24, 268, 7), // "localId"
+QT_MOC_LITERAL(25, 276, 18), // "sglSendMsgFinished"
+QT_MOC_LITERAL(26, 295, 10), // "retContent"
+QT_MOC_LITERAL(27, 306, 5), // "sglGG"
+QT_MOC_LITERAL(28, 312, 16), // "sltSetQrcodeLink"
+QT_MOC_LITERAL(29, 329, 10), // "sltHintMsg"
+QT_MOC_LITERAL(30, 340, 15), // "sltAllContactOk"
+QT_MOC_LITERAL(31, 356, 12), // "sltOneHeadOk"
+QT_MOC_LITERAL(32, 369, 13), // "sltNewMessage"
+QT_MOC_LITERAL(33, 383, 22), // "sltGetUserselfFinished"
+QT_MOC_LITERAL(34, 406, 12), // "userselfData"
+QT_MOC_LITERAL(35, 419, 18), // "sltSendMsgFinished"
+QT_MOC_LITERAL(36, 438, 19), // "sltMainLoopFinished"
+QT_MOC_LITERAL(37, 458, 4), // "work"
+QT_MOC_LITERAL(38, 463, 10), // "getOneHead"
+QT_MOC_LITERAL(39, 474, 7), // "headUrl"
+QT_MOC_LITERAL(40, 482, 20), // "getOneHeadByUsername"
+QT_MOC_LITERAL(41, 503, 7) // "sendMsg"
 
     },
     "CLibWebwx\0sglQrcodeChanged\0\0sglQrcodeOk\0"
@@ -72,11 +81,14 @@ QT_MOC_LITERAL(32, 390, 20) // "getOneHeadByUsername"
     "url\0sglGetHeadImgByUsername\0userName\0"
     "sglOneHeadOk\0headFileName\0sglNewMessage\0"
     "newMsg\0sglGetUserselfFinished\0"
-    "strUserselfData\0sglGG\0sltSetQrcodeLink\0"
+    "strUserselfData\0sglSendMsg\0fromUser\0"
+    "toUser\0content\0localId\0sglSendMsgFinished\0"
+    "retContent\0sglGG\0sltSetQrcodeLink\0"
     "sltHintMsg\0sltAllContactOk\0sltOneHeadOk\0"
     "sltNewMessage\0sltGetUserselfFinished\0"
-    "userselfData\0sltMainLoopFinished\0work\0"
-    "getOneHead\0headUrl\0getOneHeadByUsername"
+    "userselfData\0sltSendMsgFinished\0"
+    "sltMainLoopFinished\0work\0getOneHead\0"
+    "headUrl\0getOneHeadByUsername\0sendMsg"
 };
 #undef QT_MOC_LITERAL
 
@@ -86,38 +98,42 @@ static const uint qt_meta_data_CLibWebwx[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      20,   14, // methods
+      24,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      10,       // signalCount
+      12,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  114,    2, 0x06 /* Public */,
-       3,    1,  115,    2, 0x06 /* Public */,
-       5,    2,  118,    2, 0x06 /* Public */,
-       8,    1,  123,    2, 0x06 /* Public */,
-      10,    1,  126,    2, 0x06 /* Public */,
-      12,    1,  129,    2, 0x06 /* Public */,
-      14,    1,  132,    2, 0x06 /* Public */,
-      16,    1,  135,    2, 0x06 /* Public */,
-      18,    1,  138,    2, 0x06 /* Public */,
-      20,    0,  141,    2, 0x06 /* Public */,
+       1,    0,  134,    2, 0x06 /* Public */,
+       3,    1,  135,    2, 0x06 /* Public */,
+       5,    2,  138,    2, 0x06 /* Public */,
+       8,    1,  143,    2, 0x06 /* Public */,
+      10,    1,  146,    2, 0x06 /* Public */,
+      12,    1,  149,    2, 0x06 /* Public */,
+      14,    1,  152,    2, 0x06 /* Public */,
+      16,    1,  155,    2, 0x06 /* Public */,
+      18,    1,  158,    2, 0x06 /* Public */,
+      20,    4,  161,    2, 0x06 /* Public */,
+      25,    1,  170,    2, 0x06 /* Public */,
+      27,    0,  173,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      21,    1,  142,    2, 0x0a /* Public */,
-      22,    1,  145,    2, 0x0a /* Public */,
-      23,    1,  148,    2, 0x0a /* Public */,
-      24,    1,  151,    2, 0x0a /* Public */,
-      25,    1,  154,    2, 0x0a /* Public */,
-      26,    1,  157,    2, 0x0a /* Public */,
-      28,    0,  160,    2, 0x0a /* Public */,
+      28,    1,  174,    2, 0x0a /* Public */,
+      29,    1,  177,    2, 0x0a /* Public */,
+      30,    1,  180,    2, 0x0a /* Public */,
+      31,    1,  183,    2, 0x0a /* Public */,
+      32,    1,  186,    2, 0x0a /* Public */,
+      33,    1,  189,    2, 0x0a /* Public */,
+      35,    1,  192,    2, 0x0a /* Public */,
+      36,    0,  195,    2, 0x0a /* Public */,
 
  // methods: name, argc, parameters, tag, flags
-      29,    0,  161,    2, 0x02 /* Public */,
-      30,    1,  162,    2, 0x02 /* Public */,
-      32,    1,  165,    2, 0x02 /* Public */,
+      37,    0,  196,    2, 0x02 /* Public */,
+      38,    1,  197,    2, 0x02 /* Public */,
+      40,    1,  200,    2, 0x02 /* Public */,
+      41,    4,  203,    2, 0x02 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -129,6 +145,8 @@ static const uint qt_meta_data_CLibWebwx[] = {
     QMetaType::Void, QMetaType::QString,   15,
     QMetaType::Void, QMetaType::QString,   17,
     QMetaType::Void, QMetaType::QString,   19,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   21,   22,   23,   24,
+    QMetaType::Void, QMetaType::QString,   26,
     QMetaType::Void,
 
  // slots: parameters
@@ -137,13 +155,15 @@ static const uint qt_meta_data_CLibWebwx[] = {
     QMetaType::Void, QMetaType::QByteArray,    9,
     QMetaType::Void, QMetaType::QString,   15,
     QMetaType::Void, QMetaType::QString,   17,
-    QMetaType::Void, QMetaType::QVariantHash,   27,
+    QMetaType::Void, QMetaType::QVariantHash,   34,
+    QMetaType::Void, QMetaType::QString,   26,
     QMetaType::Void,
 
  // methods: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   31,
+    QMetaType::Void, QMetaType::QString,   39,
     QMetaType::Void, QMetaType::QString,   13,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   21,   22,   23,   24,
 
        0        // eod
 };
@@ -163,17 +183,21 @@ void CLibWebwx::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 6: _t->sglOneHeadOk((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 7: _t->sglNewMessage((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 8: _t->sglGetUserselfFinished((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 9: _t->sglGG(); break;
-        case 10: _t->sltSetQrcodeLink((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 11: _t->sltHintMsg((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->sltAllContactOk((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
-        case 13: _t->sltOneHeadOk((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 14: _t->sltNewMessage((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 15: _t->sltGetUserselfFinished((*reinterpret_cast< const QVariantHash(*)>(_a[1]))); break;
-        case 16: _t->sltMainLoopFinished(); break;
-        case 17: _t->work(); break;
-        case 18: _t->getOneHead((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 19: _t->getOneHeadByUsername((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 9: _t->sglSendMsg((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
+        case 10: _t->sglSendMsgFinished((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 11: _t->sglGG(); break;
+        case 12: _t->sltSetQrcodeLink((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 13: _t->sltHintMsg((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->sltAllContactOk((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
+        case 15: _t->sltOneHeadOk((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 16: _t->sltNewMessage((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 17: _t->sltGetUserselfFinished((*reinterpret_cast< const QVariantHash(*)>(_a[1]))); break;
+        case 18: _t->sltSendMsgFinished((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 19: _t->sltMainLoopFinished(); break;
+        case 20: _t->work(); break;
+        case 21: _t->getOneHead((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 22: _t->getOneHeadByUsername((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 23: _t->sendMsg((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -242,9 +266,23 @@ void CLibWebwx::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             }
         }
         {
+            using _t = void (CLibWebwx::*)(const QString & , const QString & , const QString & , const QString & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CLibWebwx::sglSendMsg)) {
+                *result = 9;
+                return;
+            }
+        }
+        {
+            using _t = void (CLibWebwx::*)(const QString & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CLibWebwx::sglSendMsgFinished)) {
+                *result = 10;
+                return;
+            }
+        }
+        {
             using _t = void (CLibWebwx::*)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CLibWebwx::sglGG)) {
-                *result = 9;
+                *result = 11;
                 return;
             }
         }
@@ -276,13 +314,13 @@ int CLibWebwx::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 20)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 20;
+        _id -= 24;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 20)
+        if (_id < 24)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 20;
+        _id -= 24;
     }
     return _id;
 }
@@ -350,9 +388,23 @@ void CLibWebwx::sglGetUserselfFinished(const QString & _t1)
 }
 
 // SIGNAL 9
+void CLibWebwx::sglSendMsg(const QString & _t1, const QString & _t2, const QString & _t3, const QString & _t4)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)) };
+    QMetaObject::activate(this, &staticMetaObject, 9, _a);
+}
+
+// SIGNAL 10
+void CLibWebwx::sglSendMsgFinished(const QString & _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 10, _a);
+}
+
+// SIGNAL 11
 void CLibWebwx::sglGG()
 {
-    QMetaObject::activate(this, &staticMetaObject, 9, nullptr);
+    QMetaObject::activate(this, &staticMetaObject, 11, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
